@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: task6-1
+  name: task6-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task6-1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: task6-1
+    spec:
+      containers:
+      - image: chunyiwang/task6-2:v2
+        name: workshop
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task6-1-service
+spec:
+  type: ClusterIP
+  clusterIP: 10.1.122.2
+  selector:
+    app: task6-1
+  ports:
+    - port: 80          
+      targetPort: 3040
+      protocol: TCP
+
